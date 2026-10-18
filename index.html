@@ -1,5 +1,56 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WHF Store | Waghoba Foundation</title><link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet"><style>
 @font-face{font-family:Gagalin;src:local("Gagalin")} :root{--teal:#2e5959;--gold:#efba43;--paper:#f8f5ed;--muted:#6c7770;--line:#d9d7cc}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--teal);font-family:"Open Sans",Arial,sans-serif}.wrap{width:min(1200px,92%);margin:auto}.top{padding:24px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:18px}.logo,h1,h2,h3,.section{font-family:Gagalin,"Arial Black",Impact,sans-serif;text-transform:uppercase;font-weight:900}.logo{font-size:30px;text-decoration:none}.logo span,h1 span{color:var(--gold)}a{color:inherit}.cartlink{background:var(--teal);color:white;padding:11px 15px;text-decoration:none;font-size:12px}.hero{padding:64px 0 54px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:1.2fr .8fr;gap:5%;align-items:center}.kicker{font-size:11px;letter-spacing:.17em;text-transform:uppercase;color:var(--muted)}h1{font-size:clamp(48px,7vw,90px);line-height:.95;margin:15px 0}.intro{line-height:1.8;font-size:14px;color:#596b64}.seal{border:2px dashed var(--gold);border-radius:50%;padding:40px 22px;text-align:center;font:26px Gagalin,"Arial Black",sans-serif;max-width:180px;margin:25px auto 0;transform:rotate(5deg)}.tools{display:flex;gap:12px;padding:22px 0;flex-wrap:wrap}input,select{font:inherit;background:transparent;border:1px solid var(--line);padding:12px;color:var(--teal)}input{flex:1;min-width:200px}.layout{display:grid;grid-template-columns:1fr 300px;gap:28px;padding-bottom:70px;align-items:start}.products{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px 16px}.photo{aspect-ratio:4/4.7;background:linear-gradient(135deg,#e9e2d1,#d6d4bd);display:grid;place-items:center;overflow:hidden}.photo img{width:100%;height:100%;object-fit:cover}.art{font:10px "Open Sans",sans-serif;letter-spacing:.15em;text-transform:uppercase;text-align:center;padding:12px}.head{display:flex;justify-content:space-between;gap:8px;padding-top:13px}.cat{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}h3{font-size:19px;line-height:1.1;margin:6px 0}.price{font-size:13px;font-weight:700;white-space:nowrap;padding-top:4px}.desc{font-size:12px;line-height:1.6;color:var(--muted);min-height:38px}.btn{width:100%;padding:12px;border:1px solid var(--teal);background:var(--teal);color:white;cursor:pointer;font-weight:700;font-size:11px}.btn:hover{background:var(--gold);color:var(--teal);border-color:var(--gold)}.cart{background:#fffdf8;border:1px solid var(--line);padding:20px;position:sticky;top:15px}.carttop{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:12px}.cart h2{font-size:24px;margin:0}.muted{color:var(--muted);font-size:11px}.empty{font:15px/1.7 Georgia,serif;color:var(--muted);padding:15px 0}.item{display:grid;grid-template-columns:1fr auto;gap:8px;padding:12px 0;border-bottom:1px solid var(--line);font-size:12px}.qty{display:flex;align-items:center;gap:8px;margin-top:8px}.qty button{background:none;border:1px solid var(--line);color:var(--teal;width:24px;height:24px;cursor:pointer}.remove{border:0;background:none;text-decoration:underline;color:var(--muted);cursor:pointer;font-size:10px}.total{display:flex;justify-content:space-between;margin:18px 0;font-size:13px}.checkout{width:100%;padding:15px;background:var(--gold);border:0;color:var(--teal);font-weight:800;cursor:pointer}.checkout:disabled{opacity:.4}.hint{font-size:10px;line-height:1.6;color:var(--muted)}.band{background:var(--gold);padding:22px 0;margin-top:10px;font:22px Gagalin,"Arial Black",sans-serif;text-transform:uppercase}.foot{padding:24px 0;display:flex;justify-content:space-between;gap:15px;color:var(--muted);font-size:10px}@media(max-width:900px){.products{grid-template-columns:repeat(2,minmax(0,1fr))}.layout{grid-template-columns:1fr}.cart{position:static;grid-row:1}}@media(max-width:600px){.hero{grid-template-columns:1fr;padding:42px 0}.seal{display:none}.products{gap:25px 12px}.logo{font-size:24px}.foot{flex-direction:column}.cartlink{font-size:11px}}@media(max-width:400px){h3{font-size:16px}.price{font-size:11px}.products{grid-template-columns:1fr 1fr}}
+
+/* Responsive layout refinements */
+img { max-width: 100%; }
+button, input, select { max-width: 100%; }
+.wrap { width: min(1200px, calc(100% - 40px)); }
+
+@media (max-width: 900px) {
+  .hero { grid-template-columns: minmax(0, 1fr) minmax(0, .9fr); gap: 28px; }
+  .layout { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .products { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cart { position: static; grid-row: auto; }
+}
+
+@media (max-width: 600px) {
+  .wrap { width: calc(100% - 32px); }
+  .top { padding: 17px 0; gap: 10px; }
+  .logo { font-size: clamp(18px, 5vw, 24px); }
+  .cartlink { padding: 10px 11px; font-size: 11px; white-space: nowrap; }
+  .hero { grid-template-columns: minmax(0, 1fr); gap: 10px; padding: 34px 0 30px; }
+  h1 { font-size: clamp(42px, 12vw, 66px); overflow-wrap: anywhere; }
+  .intro { font-size: 13px; line-height: 1.7; }
+  .seal { display: none; }
+  .tools { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; padding: 18px 0; }
+  .tools input, .tools select { width: 100%; min-width: 0; min-height: 44px; }
+  .layout { display: flex; flex-direction: column; gap: 24px; padding-bottom: 42px; }
+  .products { order: 1; width: 100%; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 12px; }
+  .cart { order: 2; width: 100%; padding: 16px; }
+  .photo { aspect-ratio: 1 / 1.05; }
+  .head { display: flex; flex-direction: column; gap: 4px; padding-top: 10px; }
+  .cat { font-size: 9px; line-height: 1.4; overflow-wrap: anywhere; }
+  h3 { font-size: clamp(14px, 4vw, 17px); line-height: 1.2; overflow-wrap: anywhere; }
+  .price { font-size: 12px; padding-top: 0; white-space: normal; line-height: 1.5; }
+  .desc { font-size: 11px; min-height: 0; margin: 8px 0 12px; }
+  .btn { padding: 12px 8px; min-height: 42px; font-size: 10px; }
+  .item { grid-template-columns: minmax(0, 1fr) auto; }
+  .band { font-size: 18px; line-height: 1.35; padding: 18px 0; }
+  .foot { flex-direction: column; gap: 8px; padding: 20px 0; }
+}
+
+@media (max-width: 360px) {
+  .wrap { width: calc(100% - 24px); }
+  .top { align-items: flex-start; }
+  .logo { font-size: 17px; }
+  .cartlink { padding: 9px 8px; font-size: 10px; }
+  .products { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .photo { aspect-ratio: 4 / 3.7; }
+  .head { flex-direction: row; align-items: flex-start; justify-content: space-between; }
+  h3 { font-size: 17px; }
+  .price { text-align: right; white-space: nowrap; }
+}
+
 </style></head><body><header class="wrap top"><a class="logo" href="#"><span>WHF</span> STORE</a><a class="cartlink" href="#cart">Your cart (<span id="navcount">0</span>)</a></header><section class="wrap hero"><div><div class="kicker">Forest to table · Community-led</div><h1>Wild foods.<br><span>Living</span> forests.</h1></div><div><p class="intro">Discover wild foods, traditional flavours and forest-linked products from Waghoba Foundation. Browse the collection, add your favourites to your basket, and send one combined enquiry directly on WhatsApp.</p><p class="intro"><b>Every order can help connect Indigenous forest communities with urban residents.</b></p><div class="seal">Rooted<br>in the wild</div></div></section><main class="wrap"><div class="tools"><input id="search" placeholder="Find a product…" aria-label="Search"><select id="category"><option value="">All collections</option></select><select id="sort"><option value="featured">Featured</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option><option value="name">Name: A–Z</option></select></div><div class="layout"><section class="products" id="products"></section><aside class="cart" id="cart"><div class="carttop"><h2>Your basket</h2><span class="muted" id="count">0 items</span></div><div id="items" class="empty">Your basket is waiting for something wild. Add products to get started.</div><div class="total"><span>Estimated subtotal</span><b id="total">₹0</b></div><button id="checkout" class="checkout" disabled>ORDER ON WHATSAPP ↗</button><p class="hint">We’ll confirm availability, delivery charges and payment details on WhatsApp. Prices are indicative until confirmed.</p></aside></div></main><section class="band"><div class="wrap">Good food. Stronger forest connections.</div></section><footer class="wrap foot"><span>© Waghoba Foundation · WHF Store</span><a href="https://waghoba.org/">waghoba.org</a><span>Forest conservation through community connection</span></footer><script src="config.js"></script><script>
 const SAMPLE=[
 ["MAH-001","Magic Mahua Oil","Mahua Products",600,"","Traditional mahua oil. Confirm size and availability.",1],
