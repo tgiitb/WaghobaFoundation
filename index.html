@@ -241,6 +241,11 @@ let products=[],details={},groups=[],idToGroup={},cart={};
 const money=n=>new Intl.NumberFormat("en-IN",{style:"currency",currency:"INR",maximumFractionDigits:0}).format(n||0);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const unitLabel=p=>(p.unit&&String(p.unit).trim())||"Qty: TBD";
+/* pack size of ONE unit: "per kg" -> "1 kg", "per jar" -> "1 jar", "150 ml" stays "150 ml" */
+function packLabel(p){let u=String(p.unit||"").trim().replace(/^per\s+/i,"");if(u&&!/^\d/.test(u))u="1 "+u;return u}
+/* for plain measures, the total amount: 2 × 1 kg -> " (2 kg total)" */
+function totalLabel(p,qty){const m=/^(\d+(?:\.\d+)?)\s*(kg|gms?|g|ml|l|ltr)$/i.exec(packLabel(p));if(!m||qty<2)return "";return " ("+(Math.round(parseFloat(m[1])*qty*100)/100)+" "+m[2].toLowerCase()+" total)"}
+function qtyLine(p,qty){const pk=packLabel(p);return pk?`${qty} × ${pk}`:`Qty ${qty}`}
 const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 
 /* ---------- images, stock status, prices ---------- */
@@ -327,7 +332,7 @@ function actHTML(p,short){
   const qty=cart[p.id]||0,id=esc(p.id),pre=p.status==="soldout";
   if(!qty)return `<button class="btn" data-add="${id}">${pre?"PRE-ORDER +":(short?"ADD +":"ADD TO CART +")}</button>`;
   const line=p.price>0?` · ${money(p.price*qty)}`:"";
-  return `<div class="qs" role="group" aria-label="Quantity of ${esc(p.name)}"><button type="button" data-dec="${id}" aria-label="Decrease quantity">−</button><input type="number" inputmode="numeric" min="1" max="${MAXQ}" value="${qty}" data-qin="${id}" aria-label="Quantity of ${esc(p.name)}"><button type="button" data-inc="${id}" aria-label="Increase quantity">+</button></div><div class="qs-note">${pre?"Pre-order · ":""}${qty} × ${esc(unitLabel(p))}${line}</div>`;
+  return `<div class="qs" role="group" aria-label="Quantity of ${esc(p.name)}"><button type="button" data-dec="${id}" aria-label="Decrease quantity">−</button><input type="number" inputmode="numeric" min="1" max="${MAXQ}" value="${qty}" data-qin="${id}" aria-label="Quantity of ${esc(p.name)}"><button type="button" data-inc="${id}" aria-label="Increase quantity">+</button></div><div class="qs-note">${pre?"Pre-order · ":""}${esc(qtyLine(p,qty))}${line}</div>`;
 }
 function groupBtn(g){
   const n=g.variants.reduce((a,x)=>a+(cart[x.id]||0),0);
@@ -344,7 +349,7 @@ function setQty(id,q){
 }
 
 /* ---------- WhatsApp ---------- */
-function waMessage(xs){const sum=xs.reduce((a,x)=>a+x.qty*x.p.price,0);return "Namaste Waghoba Foundation! I'd like to order/enquire about:\n\n"+xs.map(({p,qty})=>`• ${p.name} (${p.id}) × ${qty}${p.status==="soldout"?" [PRE-ORDER]":""} — ${p.price>0?money(p.price*qty):"price to be confirmed"} (${unitLabel(p)})`).join("\n")+`\n\nEstimated subtotal: ${money(sum)}\nPlease confirm availability, delivery charges and payment details. Thank you!`}
+function waMessage(xs){const sum=xs.reduce((a,x)=>a+x.qty*x.p.price,0);return "Namaste Waghoba Foundation! I'd like to order/enquire about:\n\n"+xs.map(({p,qty})=>`• ${p.name} (${p.id}): ${qtyLine(p,qty)}${totalLabel(p,qty)}${p.status==="soldout"?" [PRE-ORDER]":""} — ${p.price>0?money(p.price*qty)+" total":"price to be confirmed"}`).join("\n")+`\n\nEstimated subtotal: ${money(sum)}\nPlease confirm availability, delivery charges and payment details. Thank you!`}
 function openWAText(text){const phone=(CFG().whatsappNumber||"").replace(/\D/g,"");if(!phone){alert("Add WhatsApp number in config.js");return}window.open("https://wa.me/"+phone+"?text="+encodeURIComponent(text),"_blank","noopener")}
 function openWA(xs){openWAText(waMessage(xs))}
 function openWAAsk(p){const g=idToGroup[String(p.id).toUpperCase()],nm=g?g.name:p.name;openWAText(`Namaste Waghoba Foundation! I'd like to ask about the availability of ${nm}${p.season?` (${p.season})`:""}. Could you let me know when it will be available? Thank you!`)}
