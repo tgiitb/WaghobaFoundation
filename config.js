@@ -13,7 +13,16 @@ window.CATALOG_CONFIG = {
   //   MAH-005-1.jpeg|MAH-005-2.jpeg
   // (Full https:// links also work and are used as they are.)
   // Any product with no image, or whose file can't be loaded, shows images/default.jpeg
-  imageBase: "images/"
+  imageBase: "images/",
+
+  // Minimum order value in rupees. Orders below this are not sent to WhatsApp (set 0 to switch off).
+  minOrder: 1000,
+
+  // Optional: log WhatsApp orders in a Google Sheet (see orders-log-apps-script.gs).
+  // Paste the Apps Script web app URL between the quotes. Leave empty to switch logging off.
+  ordersLogUrl: "https://script.google.com/macros/s/AKfycbxeiMqW0FKXBWZtXcJ7e3iQoVHIHFNOIl1hTUuAf3EcjyKbhoIyrhnjnT-7bl27odSlsg/exec",
+  // "preorder" = log only orders that include a pre-order item; "all" = log every order
+  logOrders: "preorder"
 
   // Optional: where the "Read more" text in product descriptions should link to.
   // Remove the // below and add a comma after the line above to switch it on.
