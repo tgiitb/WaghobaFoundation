@@ -20,9 +20,17 @@ window.CATALOG_CONFIG = {
 
   // Optional: log WhatsApp orders in a Google Sheet (see orders-log-apps-script.gs).
   // Paste the Apps Script web app URL between the quotes. Leave empty to switch logging off.
-  ordersLogUrl: "https://script.google.com/macros/s/AKfycbxeiMqW0FKXBWZtXcJ7e3iQoVHIHFNOIl1hTUuAf3EcjyKbhoIyrhnjnT-7bl27odSlsg/exec",
+  ordersLogUrl: "https://script.google.com/macros/s/AKfycbyZYHoe0dyPMxDexWxtLMHLW-TT7N8ibBL4aDzrfcdUI7bqHQDMfUzbuitDSnmeSUeD5g/exec",
   // "preorder" = log only orders that include a pre-order item; "all" = log every order
-  logOrders: "preorder"
+  logOrders: "all",
+
+  // Delivery address search (Google Maps "Places" suggestions). Paste a Google Maps API key between the quotes.
+  // Leave empty and customers choose their city from a list and type the address instead.
+  // Restrict the key to your website address in Google Cloud so nobody else can use it.
+  googleMapsKey: "",
+  // Cities we deliver to. An address whose city is not in this list gets the "not delivering yet" message.
+  // Add nearby areas Google may report instead (for example "Panvel", "Kharghar").
+  deliveryAreas: ["Mumbai", "Navi Mumbai", "Thane"]
 
   // Optional: where the "Read more" text in product descriptions should link to.
   // Remove the // below and add a comma after the line above to switch it on.
